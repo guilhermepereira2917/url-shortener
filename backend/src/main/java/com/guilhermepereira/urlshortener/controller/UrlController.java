@@ -5,6 +5,7 @@ import com.guilhermepereira.urlshortener.dto.ShortenUrlResponse;
 import com.guilhermepereira.urlshortener.exception.InvalidURLException;
 import com.guilhermepereira.urlshortener.service.UrlService;
 import jakarta.servlet.http.HttpServletRequest;
+import org.apache.coyote.Response;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,5 +46,10 @@ public class UrlController {
         headers.setLocation(URI.create(urlEntity.getFullUrl()));
 
         return ResponseEntity.status(HttpStatus.FOUND).headers(headers).build();
+    }
+
+    @GetMapping("/health")
+    public ResponseEntity<Void> health() {
+        return ResponseEntity.ok().build();
     }
 }
